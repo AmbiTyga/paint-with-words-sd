@@ -1,6 +1,7 @@
 import math
 from typing import Callable, Dict, List, Optional, Tuple
 
+from ast import literal_eval
 import numpy as np
 import PIL
 import torch
@@ -177,8 +178,7 @@ def _image_context_seperator(
             )
             v_as_tokens = v_input["input_ids"][1:-1]
             if isinstance(color, str):
-                r, g, b = color[1:3], color[3:5], color[5:7]
-                color = (int(r, 16), int(g, 16), int(b, 16))
+                r, g, b = literal_eval(color)
 
             img_where_color = (np.array(img) == color).all(axis=-1)
 
